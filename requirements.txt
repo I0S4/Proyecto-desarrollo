@@ -1,3 +1,0 @@
-# Dependencias necesarias para ejecutar la aplicación
-
-PySide6
