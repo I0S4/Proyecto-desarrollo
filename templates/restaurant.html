@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ restaurant.name }} — Menú{% endblock %}
+{% block content %}
+<article class="restaurant-header">
+  <img class="hero" src="{{ restaurant.image }}" alt="{{ restaurant.name }}">
+  <h2>{{ restaurant.name }}</h2>
+  <p>{{ restaurant.short }}</p>
+</article>
+
+<section class="menu">
+  {% for cat in restaurant.menu %}
+  <div class="menu-category">
+    <h3>{{ cat.category }}</h3>
+    <ul>
+      {% for item in cat.items %}
+      <li class="menu-item">
+        <span class="item-name">{{ item.name }}</span>
+        <span class="item-price">${{ '%.2f'|format(item.price) }}</span>
+        {% if item.tags %}
+          <small class="tags">{{ item.tags | join(', ') }}</small>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Cafetería Central",
+      "short": "Sándwiches, jugos y más",
+      "image": "https://raw.githubusercontent.com/I0S4/Proyecto-desarrollo/main/Dise%C3%B1o%20Externo/Mockup/Catalogo%20Restaurante.png",
+      "menu": [
+        {"category": "Desayuno", "items": [
+          {"name": "Tostadas con jamón", "price": 3.5, "tags": ["popular"]},
+          {"name": "Avena con frutas", "price": 2.8, "tags": ["saludable"]}
+        ]},
+        {"category": "Bebidas", "items": [
+          {"name": "Café americano", "price": 1.2, "tags": []},
+          {"name": "Jugo natural", "price": 1.8, "tags": ["vegano"]}
+        ]}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Comedor Norte",
+      "short": "Menú del día y combos",
+      "image": "https://raw.githubusercontent.com/I0S4/Proyecto-desarrollo/main/Dise%C3%B1o%20Externo/Mockup/Catalogo%20menu.png",
+      "menu": [
+        {"category": "Platos", "items": [
+          {"name": "Pollo a la plancha", "price": 4.0, "tags": []},
+          {"name": "Ensalada César", "price": 3.2, "tags": ["vegetariano"]}
+        ]}
+      ]
+    }
+  ]
+}

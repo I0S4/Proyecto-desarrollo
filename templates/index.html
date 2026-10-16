@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Listado de restaurantes{% endblock %}
+{% block content %}
+<h2>Restaurantes</h2>
+<div class="cards">
+  {% for r in restaurants %}
+  <article class="card">
+    <img src="{{ r.image }}" alt="{{ r.name }}">
+    <div class="card-body">
+      <h3>{{ r.name }}</h3>
+      <p class="short">{{ r.short }}</p>
+      <a class="btn" href="{{ url_for('restaurant', r_id=r.id) }}">Ver menú</a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

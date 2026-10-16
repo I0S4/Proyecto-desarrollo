@@ -1,0 +1,21 @@
+:root{
+  --accent: #2b6cb0;
+  --muted: #666;
+  --bg: #f8fafc;
+}
+body{font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:#111;}
+.container{max-width:1000px;margin:0 auto;padding:1rem;}
+.site-header{background:white;border-bottom:1px solid #e6e6e6;padding:1rem 0;margin-bottom:1rem;}
+.site-title{margin:0;color:var(--accent);}
+.cards{display:flex;gap:1rem;flex-wrap:wrap;}
+.card{background:white;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);width:300px;}
+.card img{width:100%;height:160px;object-fit:cover;}
+.card-body{padding:0.75rem;}
+.card h3{margin:0 0 .25rem 0;}
+.card .short{color:var(--muted);margin:0 0 .5rem 0;}
+.btn{display:inline-block;padding:.4rem .7rem;background:var(--accent);color:white;border-radius:6px;text-decoration:none;}
+.restaurant-header .hero{width:100%;height:220px;object-fit:cover;border-radius:6px;}
+.menu-category{background:white;padding:1rem;margin:0.75rem 0;border-radius:8px;}
+.menu-item{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px dashed #eee;}
+.menu-item:last-child{border-bottom:none;}
+.tags{color:var(--muted);margin-left:1rem;font-size:.85rem;}
