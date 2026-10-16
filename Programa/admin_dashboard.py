@@ -19,10 +19,12 @@ class AdminDashboard(QWidget):
                     {"nombre": "Sopa a la Minuta", "precio": "Incluido"}
                 ],
                 "Segundo": [
-                    {"nombre": "Lomo Saltado", "precio": "S/14.00"},
+                    {"nombre": "Tallarín Rojo con Pollo", "precio": "S/10.00"},
+                    {"nombre": "Hamburguesa de Lentejas c/ Ensalada", "precio": "S/10.00"},
                     {"nombre": "Ají de Gallina", "precio": "S/12.00"},
-                    {"nombre": "Tallarines Verdes con Bistec", "precio": "S/15.00"},
-                    {"nombre": "Arroz Chaufa de Pollo", "precio": "S/13.00"}
+                    {"nombre": "Arroz Chaufa de Pollo", "precio": "S/13.00"},
+                    {"nombre": "Lomo Saltado", "precio": "S/14.00"},
+                    {"nombre": "Tallarines Verdes con Bistec", "precio": "S/15.00"}
                 ],
                 "Postres y Bebidas": [
                     {"nombre": "Chicha Morada (Jarra)", "precio": "S/5.00"},
@@ -36,11 +38,12 @@ class AdminDashboard(QWidget):
                     {"nombre": "Ocopa Arequipeña", "precio": "Incluido"}
                 ],
                 "Segundo": [
+                    {"nombre": "Guiso de Arvejas con Pollo", "precio": "S/10.00"},
+                    {"nombre": "Estofado de Pollo", "precio": "S/11.00"},
                     {"nombre": "Arroz con Pollo", "precio": "S/12.00"},
                     {"nombre": "Pollo al Horno con Puré", "precio": "S/13.00"},
-                    {"nombre": "Seco de Carne con Frijoles", "precio": "S/14.00"},
                     {"nombre": "Pescado Frito con Yuca", "precio": "S/13.00"},
-                    {"nombre": "Estofado de Pollo", "precio": "S/11.00"}
+                    {"nombre": "Seco de Carne con Frijoles", "precio": "S/14.00"}
                 ],
                 "Postres y Bebidas": [
                     {"nombre": "Refresco de Maracuyá", "precio": "S/2.50"},
@@ -54,11 +57,11 @@ class AdminDashboard(QWidget):
                     {"nombre": "Salpicón de Pollo", "precio": "Incluido"}
                 ],
                 "Segundo": [
-                    {"nombre": "Pechuga a la Plancha c/ Ensalada", "precio": "S/14.00"},
-                    {"nombre": "Pescado al Vapor", "precio": "S/15.00"},
-                    {"nombre": "Saltado de Brócoli y Pollo", "precio": "S/13.00"},
+                    {"nombre": "Quinoa Atamalada", "precio": "S/11.00"},
                     {"nombre": "Omelette de Verduras", "precio": "S/12.00"},
-                    {"nombre": "Quinoa Atamalada", "precio": "S/11.00"}
+                    {"nombre": "Saltado de Brócoli y Pollo", "precio": "S/13.00"},
+                    {"nombre": "Pechuga a la Plancha c/ Ensalada", "precio": "S/14.00"},
+                    {"nombre": "Pescado al Vapor", "precio": "S/15.00"}
                 ],
                 "Postres y Bebidas": [
                     {"nombre": "Agua de Manzana", "precio": "S/2.00"},
@@ -136,20 +139,15 @@ class AdminDashboard(QWidget):
         self.dish_combo = QComboBox()
         form_layout.addWidget(self.dish_combo, 2, 2)
 
-        form_layout.addWidget(QLabel("Tipo de Menú"), 3, 0)
-        self.tipo_combo = QComboBox()
-        self.tipo_combo.addItems(["Económico", "Universitario", "Ejecutivo"])
-        form_layout.addWidget(self.tipo_combo, 4, 0)
-
-        form_layout.addWidget(QLabel("Número de Raciones"), 3, 1)
+        form_layout.addWidget(QLabel("Número de Raciones"), 3, 0)
         self.raciones_input = QLineEdit()
         self.raciones_input.setPlaceholderText("Ej. 50")
-        form_layout.addWidget(self.raciones_input, 4, 1)
+        form_layout.addWidget(self.raciones_input, 4, 0)
 
-        form_layout.addWidget(QLabel("Estado"), 3, 2)
+        form_layout.addWidget(QLabel("Estado"), 3, 1)
         self.status_combo = QComboBox()
         self.status_combo.addItems(["Disponible", "Agotado"])
-        form_layout.addWidget(self.status_combo, 4, 2)
+        form_layout.addWidget(self.status_combo, 4, 1)
 
         btn_save = QPushButton("+ Guardar Raciones")
         btn_save.setObjectName("primaryButton")
@@ -187,6 +185,24 @@ class AdminDashboard(QWidget):
         self.cat_combo.currentTextChanged.connect(self.actualizar_platos_combo)
         self.actualizar_platos_combo()
 
+    def calcular_tipo_menu(self, precio_str):
+        """Calcula automáticamente el tipo de menú según el rango de precios."""
+        if precio_str == "Incluido":
+            return "Económico"
+        
+        try:
+            limpio = precio_str.replace("S/", "").strip()
+            precio = float(limpio)
+            
+            if precio <= 10.0:
+                return "Económico"
+            elif 10.0 < precio <= 12.0:
+                return "Universitario"
+            else:
+                return "Ejecutivo"
+        except ValueError:
+            return "Económico"
+
     def actualizar_platos_combo(self):
         self.dish_combo.clear()
         rest = self.rest_combo.currentText()
@@ -194,7 +210,6 @@ class AdminDashboard(QWidget):
         
         platos = self.catalogo_maestro.get(rest, {}).get(cat, [])
         for p in platos:
-            # Si el precio es "Incluido", se muestra más bonito en la lista desplegable
             if p['precio'] == "Incluido":
                 self.dish_combo.addItem(f"{p['nombre']} (Incluido)", p)
             else:
@@ -224,12 +239,14 @@ class AdminDashboard(QWidget):
         if not raciones:
             raciones = "N/A"
 
+        tipo_auto = self.calcular_tipo_menu(plato_data["precio"])
+
         nuevo_plato = {
             "nombre": plato_data["nombre"],
             "precio": plato_data["precio"],
             "estado": self.status_combo.currentText(),
             "categoria": self.cat_combo.currentText(),
-            "tipo": self.tipo_combo.currentText(),
+            "tipo": tipo_auto,
             "raciones": raciones
         }
 
