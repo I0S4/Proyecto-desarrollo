@@ -57,11 +57,11 @@ class AdminDashboard(QWidget):
                     {"nombre": "Salpicón de Pollo", "precio": "Incluido"}
                 ],
                 "Segundo": [
-                    {"nombre": "Quinoa Atamalada", "precio": "S/11.00"},
-                    {"nombre": "Omelette de Verduras", "precio": "S/12.00"},
-                    {"nombre": "Saltado de Brócoli y Pollo", "precio": "S/13.00"},
-                    {"nombre": "Pechuga a la Plancha c/ Ensalada", "precio": "S/14.00"},
-                    {"nombre": "Pescado al Vapor", "precio": "S/15.00"}
+                    {"nombre": "Chaufa Chi Jau Kay", "precio": "S/10.00"},
+                    {"nombre": "Pollo al Horno", "precio": "S/10.00"},
+                    {"nombre": "Arroz Tapado", "precio": "S/10.00"},
+                    {"nombre": "Pollo a la Brasa con Papa", "precio": "S/11.00"},
+                    {"nombre": "Pechuga a la Plancha c/ Ensalada", "precio": "S/14.00"}
                 ],
                 "Postres y Bebidas": [
                     {"nombre": "Agua de Manzana", "precio": "S/2.00"},
