@@ -7,18 +7,35 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">Menús Universidad</h1>
-    </div>
-  </header>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/I0S4/Proyecto-desarrollo/main/Dise%C3%B1o%20Externo/Mockup/Usuario%201.png" alt="logo">
+        <div>Sistema de Restaurantes</div>
+      </div>
+      <nav class="nav">
+        <a class="nav-btn" href="{{ url_for('index') }}">Raciones</a>
+        <a class="nav-btn" href="#">Catálogos</a>
+        <a class="nav-btn" href="#">Maestro de Platos</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="logout" href="{{ url_for('login') }}">Cerrar Sesión</a>
+      </div>
+    </aside>
 
-  <main class="container">
-    {% block content %}{% endblock %}
-  </main>
+    <main class="main">
+      <header class="main-header">
+        <div class="search">
+          <input placeholder="Buscar plato" />
+        </div>
+        <div class="userlinks">Menú Univ</div>
+      </header>
 
-  <footer class="site-footer">
-    <div class="container">© Universidad — Menús</div>
-  </footer>
+      <section class="content">
+        {% block content %}{% endblock %}
+      </section>
+
+    </main>
+  </div>
 </body>
 </html>

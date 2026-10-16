@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Login — Sistema{% endblock %}
+{% block content %}
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="login-top">
+      <img src="https://raw.githubusercontent.com/I0S4/Proyecto-desarrollo/main/Dise%C3%B1o%20Externo/Mockup/Catalogo%20Restaurante.png" alt="logo">
+    </div>
+    <h2>Sistema de Restaurantes</h2>
+    <p class="muted">Inicia sesión para continuar</p>
+    <form class="login-form" action="{{ url_for('index') }}">
+      <label>Usuario</label>
+      <input type="text" value="" />
+      <label>Contraseña</label>
+      <input type="password" />
+      <div class="login-actions">
+        <label><input type="checkbox" /> Recordar sesión</label>
+      </div>
+      <button class="primary" type="submit">Iniciar Sesión</button>
+      <div class="demo-buttons">
+        <button type="button" class="ghost" onclick="window.location.href='{{ url_for('index') }}'">Demo Administrador</button>
+        <button type="button" class="ghost" onclick="window.location.href='{{ url_for('index') }}'">Demo Comensal</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

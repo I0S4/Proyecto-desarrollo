@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, redirect, url_for
 import json
 import os
 
@@ -11,6 +11,15 @@ def load_data():
         return json.load(f)
 
 @app.route('/')
+def root():
+    # show login first
+    return redirect(url_for('login'))
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/home')
 def index():
     data = load_data()
     return render_template('index.html', restaurants=data['restaurants'])
