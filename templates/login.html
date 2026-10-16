@@ -8,18 +8,28 @@
     </div>
     <h2>Sistema de Restaurantes</h2>
     <p class="muted">Inicia sesión para continuar</p>
-    <form class="login-form" action="{{ url_for('index') }}">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flashes">
+          {% for category, msg in messages %}
+            <div class="flash {{ category }}">{{ msg }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form class="login-form" method="post" action="{{ url_for('login') }}">
       <label>Usuario</label>
-      <input type="text" value="" />
+      <input name="username" type="text" value="" />
       <label>Contraseña</label>
-      <input type="password" />
+      <input name="password" type="password" />
       <div class="login-actions">
         <label><input type="checkbox" /> Recordar sesión</label>
       </div>
       <button class="primary" type="submit">Iniciar Sesión</button>
       <div class="demo-buttons">
-        <button type="button" class="ghost" onclick="window.location.href='{{ url_for('index') }}'">Demo Administrador</button>
-        <button type="button" class="ghost" onclick="window.location.href='{{ url_for('index') }}'">Demo Comensal</button>
+        <button type="button" class="ghost" onclick="document.querySelector('[name=username]').value='xyz'; document.querySelector('[name=password]').value='123';">Rellenar demo</button>
       </div>
     </form>
   </div>

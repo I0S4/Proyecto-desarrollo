@@ -19,7 +19,12 @@
         <a class="nav-btn" href="#">Maestro de Platos</a>
       </nav>
       <div class="sidebar-footer">
-        <a class="logout" href="{{ url_for('login') }}">Cerrar Sesión</a>
+        {% if session.get('user') %}
+          <div class="user-info">Usuario: {{ session.get('user') }}</div>
+          <a class="logout" href="{{ url_for('logout') }}">Cerrar Sesión</a>
+        {% else %}
+          <a class="logout" href="{{ url_for('login') }}">Iniciar Sesión</a>
+        {% endif %}
       </div>
     </aside>
 
